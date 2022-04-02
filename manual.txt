@@ -1,0 +1,38 @@
+○ポップアップマネージャーの使い方
+・[_popupType]について
+　Default...スライドで出てくる(一定時間(インスペクター上で変更可能)が経つと閉じる)
+　WithButton...2つボタンがついているポップアップが出てくる(ボタンを押すと閉じる)
+
+・confirmCallback,cancelCallbackについて
+　confirmCallback…決定時の処理
+　cancelCallback…キャンセル時の処理
+
+(例1)一定時間で消えるポップアップを作成する時
+・PopupManager.instance.ShowOrEnqueue(new PopupManager.PopupInfo()
+{
+	_popupType = PopupManager.PopupTypes.Default,
+	title = "ポップアップタイトル",
+	messageBody = "中身に当たるテキスト"
+});
+
+(例2)決定ボタン式のポップアップを作成する時(+αでOKボタンテキストを"AAA"に変更する)
+・PopupManager.instance.ShowOrEnqueue(new PopupManager.PopupInfo()
+{
+	_popupType = PopupManager.PopupTypes.WithOneButton,
+	title = "ポップアップタイトル",
+	messageBody = "中身に当たるテキスト",
+	confirmText = "AAA",
+	confirmCallback = () => { Debug.Log("OK"); }
+});
+
+(例3)決定、キャンセルボタン式のポップアップを作成する時(+αでOKボタンテキストを"AAA",キャンセルボタンテキストを"BBB"に変更する)
+・PopupManager.instance.ShowOrEnqueue(new PopupManager.PopupInfo()
+{
+	_popupType = PopupManager.PopupTypes.WithTwoButton,
+	title = "ポップアップタイトル",
+	messageBody = "中身に当たるテキスト",
+	confirmText = "AAA",
+	cancelText = "BBB",
+	confirmCallback = () => { Debug.Log("OK"); },
+	cancelCallback = () => { Debug.Log("Cancel"); }
+});
